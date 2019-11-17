@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="iconfont.css">
+  <title>Graffiti-Board</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="control">
+      <div class="arrow" id="arrow">
+        <a href="javascript:;" data-c="prev" class="prev iconfont icon-chexiao"></a>
+        <!-- <a href="javascript:;" data-c="next" class="next iconfont icon-iconfontqianjin"></a> -->
+      </div>
+      <div class="colors" id="colors">
+        <a href="javascript:;" data-c="#222" class="color1 active"></a>
+        <a href="javascript:;" data-c="#DF5F47" class="color2"></a>
+        <a href="javascript:;" data-c="#AFEC63" class="color3"></a>
+        <a href="javascript:;" data-c="#D3C74D" class="color4"></a>
+        <a href="javascript:;" data-c="#60C0D6" class="color5"></a>
+        <a href="javascript:;" data-c="#fff" class="color6 iconfont icon-xiangpica"></a>
+      </div>
+      
+        <input type="range" id="range" value="2" min="1" max="20">
+    
+
+    </div>
+    <canvas id="canvas" width="0" height="0"></canvas>
+    <a href="" id="save" class="save">保存</a>
+  </div>
+  <script src="index.js"></script>
+</body>
+
+</html>

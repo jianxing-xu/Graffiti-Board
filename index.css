@@ -1,0 +1,109 @@
+*{padding:0;margin:0}
+a{text-decoration: none;color: #333;}
+body,html{
+  width: 100%;
+  height: 100%;
+}
+.wrapper{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.wrapper .save{
+  font-size: 16px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  background-color: #DF5F47;
+  color:#fff;
+  border-radius: 100%;
+  box-shadow: 0 0 10px 0px #DF5F47;
+}
+.wrapper #canvas{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+input[type="range"]{
+  -webkit-appearance: none; /*去除默认样式*/
+   background-color: #ebeff4;
+   width: 140px;
+   height:4px;
+   padding: 0;
+   border: none;
+   outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+   -webkit-appearance: none;/*去除默认样式*/
+   cursor: default;
+   top: 0;
+   height: 20px;
+   width: 20px;
+   background: #fff;
+   border-radius: 50%;
+   border: 5px solid #006eb3;
+}
+.wrapper .control{
+  width: 500px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: solid 1px rgb(101, 171, 187,.5);
+}
+.arrow a{
+  padding: 0 4px;
+}
+.colors{
+  display: flex;
+  align-items: center;
+}
+.control .colors a{
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 100%;
+  margin: 0 5px;
+  color: #aaa;
+}
+.colors a.active{
+  box-shadow: 0 0 10px 0px #DF5F47;
+}
+.colors a:nth-child(1){
+  background-color: #222;
+}
+.colors a:nth-child(2){
+  background-color: #DF5F47;
+}
+.colors a:nth-child(3){
+  background-color: #AFEC63;
+}
+.colors a:nth-child(4){
+  background-color: #D3C74D;
+}
+.colors a:nth-child(5){
+  background-color: #60C0D6;
+}
+.colors a:nth-child(6){
+  padding-left: 10px;
+}
+.colors a:nth-child(6).active{
+  transform: scale(1.5);
+  color: #DF5F47;
+  box-shadow: none;
+}
+
