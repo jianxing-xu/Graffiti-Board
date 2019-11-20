@@ -80,6 +80,15 @@ input[type="range"]::-webkit-slider-thumb {
   margin: 0 5px;
   color: #aaa;
 }
+
+.colors input[type="color"] {
+  border: 0;
+  outline: none;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  transform: scale(2.5);
+}
 .colors a.active{
   box-shadow: 0 0 10px 0px #DF5F47;
 }
@@ -99,9 +108,13 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: #60C0D6;
 }
 .colors a:nth-child(6){
+  border-radius: 100%;
+  overflow: hidden;
+}
+.colors a:nth-child(7){
   padding-left: 10px;
 }
-.colors a:nth-child(6).active{
+.colors a:nth-child(7).active{
   transform: scale(1.5);
   color: #DF5F47;
   box-shadow: none;

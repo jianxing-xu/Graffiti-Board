@@ -21,6 +21,7 @@ const draw = {
   colors: document.getElementById('colors'),
   range: document.getElementById('range'),
   save: document.getElementById('save'),
+  pickColor: document.getElementById('pickColor'),
   imgArr: [],
   isRubrer: false,
   color: '#222',
@@ -36,7 +37,7 @@ const draw = {
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
     this.ctx.fillStyle = '#fff';
-    this.ctx.fillRect(0,0,10000,1000);
+    this.ctx.fillRect(0,0,10000,10000);
     this.drawing();
     this.bindEvent();
   },
@@ -68,12 +69,18 @@ const draw = {
     }
   },
   bindEvent() {
+    this.pickColor.onchange = (e) => {
+      this.ctx.strokeStyle = e.target.value;
+    }
     this.arrow.addEventListener('click', (e) => {
       let { c } = e.target.dataset;
       if (c === "prev") {
         if (this.imgArr.length > 0) {
           this.ctx.putImageData(this.imgArr.pop(), 0, 0);
         }
+      }
+      if(c === "clear") {
+        this.ctx.clearRect(0,0,10000,10000);
       }
     });
     this.colors.addEventListener('click', (e) => {

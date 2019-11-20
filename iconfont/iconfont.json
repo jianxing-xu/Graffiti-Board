@@ -1,0 +1,30 @@
+{
+  "id": "1519793",
+  "name": "Graffiti-Board",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1304981",
+      "name": "Clear-2",
+      "font_class": "15qingkong-2",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "1615712",
+      "name": "撤销",
+      "font_class": "chexiao",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "4890395",
+      "name": "橡皮擦",
+      "font_class": "xiangpica",
+      "unicode": "e6ed",
+      "unicode_decimal": 59117
+    }
+  ]
+}
