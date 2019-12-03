@@ -29,11 +29,21 @@ const draw = {
   lineCap: 'round',
   lineJoin: 'round',
   isDown: false,
+  getPos(e){
+    return {
+      x: e.pageX,
+      y: e.pageY
+    }
+  },
+  drawLine(begin,control,end) {
+    this.ctx.beginPath();
+    this.ctx.moveTo(begin.x,begin.y);
+    this.ctx.quadraticCurveTo(control.x,control.y,end.x,end.y);
+    this.ctx.stroke();
+    this.ctx.closePath();
+  },
   init() {
     this.ctx.strokeStyle = '#000';
-    this.ctx.lineWidth = this.lineWidth;
-    this.ctx.lineCap = this.lineCap;
-    this.ctx.lineJoin = this.lineJoin;
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
     this.ctx.fillStyle = '#fff';
@@ -41,36 +51,45 @@ const draw = {
     this.drawing();
     this.bindEvent();
   },
+  setStyle(){
+    this.ctx.strokeStyle = this.color;
+    this.ctx.lineWidth = this.lineWidth;
+    this.ctx.lineCap = this.lineCap;
+    this.ctx.lineJoin = this.lineJoin;
+    this.ctx.shadowColor = this.color;
+    this.ctx.shadowBlur = this.lineWidth/2;
+  },
   drawing() {
     this.canvas.addEventListener('mousedown', (e) => {
       this.isDown = true;
+      this.setStyle();
+      var {x,y} = this.getPos(e);
       this.ctx.beginPath();
-      this.ctx.moveTo(e.pageX, e.pageY);
-      var img = this.ctx.getImageData(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight);
-      this.imgArr.push(img);
+      this.ctx.moveTo(x,y);
+      this.imgArr.push(this.ctx.getImageData(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight));
     });
     this.canvas.addEventListener('mousemove', (e) => {
       if (this.isDown) {
-        this.ctx.lineTo(e.pageX, e.pageY);
+        var {x,y} = this.getPos(e);
+        this.ctx.lineTo(x,y);
         this.ctx.stroke();
       }
     });
     this.canvas.addEventListener('mouseup', (e) => {
       this.isDown = false;
-      this.ctx.closePath();
       this.saveImg();
     });
     this.canvas.onmouseout = () => {
       this.isDown = false;
-      this.ctx.closePath();
+      this.saveImg();
     }
     this.range.onchange = (e) => {
-      this.ctx.lineWidth = e.target.value;
+      this.lineWidth = e.target.value;
     }
   },
   bindEvent() {
     this.pickColor.onchange = (e) => {
-      this.ctx.strokeStyle = e.target.value;
+      this.color = e.target.value;
     }
     this.arrow.addEventListener('click', (e) => {
       let { c } = e.target.dataset;
@@ -80,6 +99,8 @@ const draw = {
         }
       }
       if(c === "clear") {
+        this.imgArr.push(this.ctx.getImageData(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight));
+        this.saveImg();
         this.ctx.clearRect(0,0,10000,10000);
       }
     });
@@ -88,9 +109,11 @@ const draw = {
       let children = [...this.colors.children];
       children.forEach(item => {
         item.className = item.className.replace('active', '');
+        item.style.boxShadow = '';
       });
       e.target.classList.add('active');
-      this.ctx.strokeStyle = c;
+      e.target.style.boxShadow = `0 0 10px 0 ${c}`
+      this.color = c;
     });
   },
   saveImg() {
