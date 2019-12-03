@@ -57,7 +57,7 @@ const draw = {
     this.ctx.lineCap = this.lineCap;
     this.ctx.lineJoin = this.lineJoin;
     this.ctx.shadowColor = this.color;
-    this.ctx.shadowBlur = this.lineWidth/2;
+    this.ctx.shadowBlur = this.lineWidth/2.5;
   },
   drawing() {
     this.canvas.addEventListener('mousedown', (e) => {
@@ -90,6 +90,8 @@ const draw = {
   bindEvent() {
     this.pickColor.onchange = (e) => {
       this.color = e.target.value;
+      let sibling = e.target.nextElementSibling || nextSibling;
+      sibling.style.color = e.target.value;
     }
     this.arrow.addEventListener('click', (e) => {
       let { c } = e.target.dataset;

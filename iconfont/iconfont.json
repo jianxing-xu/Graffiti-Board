@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "645876",
+      "name": "LC_icon_download_fill",
+      "font_class": "LC_icon_download_fill",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "1219232",
+      "name": "eglass-color",
+      "font_class": "color",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "1304981",
       "name": "Clear-2",
       "font_class": "15qingkong-2",
