@@ -54,7 +54,7 @@ input[type="range"]::-webkit-slider-thumb {
    border: 5px solid #006eb3;
 }
 .wrapper .control{
-  width: 500px;
+  /* width: 500px; */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -133,5 +133,26 @@ input[type="range"]::-webkit-slider-thumb {
   transform: scale(1.5);
   color: #DF5F47;
   box-shadow: none;
+}
+
+@media screen and (max-width: 400px) {
+  .control {
+    width: 100%;
+  }
+  .save {
+    position: absolute;
+    left: 10px;
+    top: 120px;
+  }
+  .arrow {
+    display: flex;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    flex-direction: column;
+  }
+  .arrow a {
+    padding: 5px; 
+  }
 }
 

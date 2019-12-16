@@ -29,16 +29,22 @@ const draw = {
   lineCap: 'round',
   lineJoin: 'round',
   isDown: false,
-  getPos(e){
+  getPos(e) {
+    if (e.touches) {
+      return {
+        x: e.touches[0].pageX,
+        y: e.touches[0].pageY
+      }
+    }
     return {
       x: e.pageX,
       y: e.pageY
     }
   },
-  drawLine(begin,control,end) {
+  drawLine(begin, control, end) {
     this.ctx.beginPath();
-    this.ctx.moveTo(begin.x,begin.y);
-    this.ctx.quadraticCurveTo(control.x,control.y,end.x,end.y);
+    this.ctx.moveTo(begin.x, begin.y);
+    this.ctx.quadraticCurveTo(control.x, control.y, end.x, end.y);
     this.ctx.stroke();
     this.ctx.closePath();
   },
@@ -47,31 +53,31 @@ const draw = {
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
     this.ctx.fillStyle = '#fff';
-    this.ctx.fillRect(0,0,10000,10000);
+    this.ctx.fillRect(0, 0, 10000, 10000);
     this.drawing();
     this.bindEvent();
   },
-  setStyle(){
+  setStyle() {
     this.ctx.strokeStyle = this.color;
     this.ctx.lineWidth = this.lineWidth;
     this.ctx.lineCap = this.lineCap;
     this.ctx.lineJoin = this.lineJoin;
     this.ctx.shadowColor = this.color;
-    this.ctx.shadowBlur = this.lineWidth/2.5;
+    this.ctx.shadowBlur = this.lineWidth / 2.5;
   },
-  drawing() {
+  PCEvent() {
     this.canvas.addEventListener('mousedown', (e) => {
       this.isDown = true;
       this.setStyle();
-      var {x,y} = this.getPos(e);
+      var { x, y } = this.getPos(e);
       this.ctx.beginPath();
-      this.ctx.moveTo(x,y);
+      this.ctx.moveTo(x, y);
       this.imgArr.push(this.ctx.getImageData(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight));
     });
     this.canvas.addEventListener('mousemove', (e) => {
       if (this.isDown) {
-        var {x,y} = this.getPos(e);
-        this.ctx.lineTo(x,y);
+        var { x, y } = this.getPos(e);
+        this.ctx.lineTo(x, y);
         this.ctx.stroke();
       }
     });
@@ -79,6 +85,34 @@ const draw = {
       this.isDown = false;
       this.saveImg();
     });
+  },
+  MOBEvent() {
+    this.canvas.addEventListener('touchstart', (e) => {
+      this.isDown = true;
+      this.setStyle();
+      var { x, y } = this.getPos(e);
+      this.ctx.beginPath();
+      this.ctx.moveTo(x, y);
+      this.imgArr.push(this.ctx.getImageData(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight));
+    });
+    this.canvas.addEventListener('touchmove', (e) => {
+      if (this.isDown) {
+        var { x, y } = this.getPos(e);
+        this.ctx.lineTo(x, y);
+        this.ctx.stroke();
+      }
+    });
+    this.canvas.addEventListener('touchend', (e) => {
+      this.isDown = false;
+      this.saveImg();
+    });
+  },
+  drawing() {
+    if(~navigator.userAgent.indexOf('Mobile')){
+      this.MOBEvent();
+    }else{
+      this.PCEvent();
+    }
     this.canvas.onmouseout = () => {
       this.isDown = false;
       this.saveImg();
@@ -100,10 +134,10 @@ const draw = {
           this.ctx.putImageData(this.imgArr.pop(), 0, 0);
         }
       }
-      if(c === "clear") {
+      if (c === "clear") {
         this.imgArr.push(this.ctx.getImageData(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight));
         this.saveImg();
-        this.ctx.clearRect(0,0,10000,10000);
+        this.ctx.clearRect(0, 0, 10000, 10000);
       }
     });
     this.colors.addEventListener('click', (e) => {
@@ -125,3 +159,18 @@ const draw = {
   }
 }
 draw.init();
+
+// function IsPC() {
+//   var userAgentInfo = navigator.userAgent;
+//   var Agents = ["Android", "iPhone",
+//     "SymbianOS", "Windows Phone",
+//     "iPad", "iPod"];
+//   var flag = true;
+//   for (var v = 0; v < Agents.length; v++) {
+//     if (userAgentInfo.indexOf(Agents[v]) > 0) {
+//       flag = false;
+//       break;
+//     }
+//   }
+//   return flag;
+// }
